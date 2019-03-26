@@ -1,0 +1,21 @@
+.renderer-fab-button {
+  position: absolute !important;
+  right: 14px;
+  bottom: 14px;
+  z-index: 100;
+}
+
+ren-button {
+  text-align: center;
+  padding-bottom: 2px;
+}
+
+.renderer-bottom-bar {
+  width: 100%;
+  height: 56px;
+  margin: 20px 0 !important;
+}
+
+.ren-button-bottom-bar {
+  width: 100%;
+}

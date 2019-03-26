@@ -1,0 +1,10 @@
+<mat-grid-list class="renderer-fill" [cols]="cols" [rowHeight]="rowHeight">
+  <ng-content></ng-content>
+  <ng-container *ngFor="let key of childrenKeys; let idx = index">
+
+    <mat-grid-tile (click)="itemClick.emit(key)">
+      <ng-template [renChildHost]="key"></ng-template>
+    </mat-grid-tile>
+
+  </ng-container>
+</mat-grid-list>

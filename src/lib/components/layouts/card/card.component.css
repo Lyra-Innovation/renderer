@@ -1,0 +1,11 @@
+ren-card {
+  padding: 8px;
+}
+
+.renderer-card {
+  width: 100%;
+}
+
+.renderer-card > ren-list-layout {
+  width: 100%;
+}

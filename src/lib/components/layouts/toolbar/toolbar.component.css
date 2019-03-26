@@ -1,0 +1,8 @@
+ren-toolbar {
+  width: 100%;
+}
+
+.renderer-toolbar {
+  position: sticky;
+  top: 0;
+}

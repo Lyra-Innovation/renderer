@@ -1,0 +1,18 @@
+<div fxLayout="column" [fxLayoutGap]="XL_GAP">
+  <ren-text [text]="question"></ren-text>
+
+  <mat-radio-group fxLayout="column" (change)="selectedAnswerId = $event.value" [fxLayoutGap]="SMALL_GAP">
+    <ng-container *ngFor="let answerId of answersIds; let idx = index">
+      <mat-radio-button [value]="answerId">
+        {{ answers[idx] | translate }}
+      </mat-radio-button>
+    </ng-container>
+  </mat-radio-group>
+
+  <ren-button
+    appearance="raised"
+    [disabled]="!selectedAnswerId"
+    (click)="submitAnswer()"
+    text="CORE.components.games.questions.answer"
+  ></ren-button>
+</div>

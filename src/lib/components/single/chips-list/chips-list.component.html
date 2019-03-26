@@ -1,0 +1,15 @@
+<mat-chip-list
+  [ngClass]="{ 'mat-chip-list-stacked': stacked }"
+  class="renderer-chip-list"
+  [selectable]="selectable"
+>
+  <mat-chip
+    *ngFor="let chip of inputs"
+    [attr.selected]="chip.selected"
+    [attr.disabled]="chip.disabled"
+    [color]="chip.color || chipsColor"
+    class="renderer-chip"
+  >
+    {{ chip.name | translate }}
+  </mat-chip>
+</mat-chip-list>

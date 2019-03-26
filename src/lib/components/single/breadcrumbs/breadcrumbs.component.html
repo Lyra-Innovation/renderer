@@ -1,0 +1,40 @@
+<div fxLayout="row">
+  <ng-container *ngFor="let breadcrumb of breadcrumbs; let idx = index">
+    <ren-text *ngIf="idx !== 0" text="&nbsp;>&nbsp;" type="label"></ren-text>
+
+    <ng-container *ngIf="readRoutes">
+      <a
+        [routerLink]="[breadcrumb.routeLink]"
+        [routerLinkActive]="
+          idx === breadcrumbs.length - 1 ? 'active' : 'inactive'
+        "
+        [ngClass]="
+          'renderer-breadcrumb ' + (idx === activeIndex)
+            ? 'renderer-breadcrumb-active accent-color'
+            : ''
+        "
+      >
+        <ren-text [text]="breadcrumb.label" type="label"> </ren-text>
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="!readRoutes">
+      <ng-container *ngIf="idx === activeIndex">
+        <ren-text
+          class="renderer-breadcrumb renderer-breadcrumb-routeless renderer-breadcrumb-active accent-color"
+          type="label"
+          [text]="breadcrumb.label"
+        >
+        </ren-text>
+      </ng-container>
+      <ng-container *ngIf="idx !== activeIndex">
+        <ren-text
+          class="renderer-breadcrumb renderer-breadcrumb-routeless"
+          type="label"
+          [text]="breadcrumb.label"
+        >
+        </ren-text>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

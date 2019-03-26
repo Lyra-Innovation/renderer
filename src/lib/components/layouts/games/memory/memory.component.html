@@ -1,0 +1,31 @@
+<mat-grid-list [cols]="cols" rowHeight="1:1">
+  <ng-container *ngFor="let card of cards; let idx = index">
+    <mat-grid-tile>
+      <div class="flipping-card-scene">
+        <div
+          [ngClass]="'flipping-card ' + (card.flipped ? 'is-flipped' : '')"
+          fxFlex
+        >
+          <button
+            mat-button
+            (click)="flipCard(idx)"
+            fxFlex
+            [style.pointer-events]="flipping ? 'none' : 'all'"
+            class="memory-card flipping-card-face flipping-card-front"
+          >
+            <mat-card fxFlex class="renderer-shrinked-card">
+              <ren-image fxFlex [src]="getPlaceholder(idx)"></ren-image>
+            </mat-card>
+          </button>
+
+          <mat-card
+            fxFlex
+            class="flipping-card-face flipping-card-back renderer-shrinked-card memory-card"
+          >
+            <ren-image [src]="card.image" [legend]="card.label"></ren-image>
+          </mat-card>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>

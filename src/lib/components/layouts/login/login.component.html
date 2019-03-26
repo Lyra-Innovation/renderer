@@ -1,0 +1,29 @@
+<ren-form-group
+  (formSubmitted)="submitLogin($event)"
+  fxLayoutAlign="center center"
+>
+  <ren-custom-child-template childKey="0">
+    <div fxLayout="column" [fxLayoutGap]="SMALL_GAP">
+      <ren-input
+        [label]="'CORE.components.login.' + idType"
+        controlName="userid"
+        validators="Validators.required"
+      ></ren-input>
+
+      <ren-input
+        label="CORE.components.login.password"
+        controlName="password"
+        type="password"
+        validators="Validators.required"
+      ></ren-input>
+
+      <ren-button
+        text="CORE.components.login.login-button"
+        type="submit"
+        appearance="raised"
+        [color]="color"
+      ></ren-button>
+    </div>
+  </ren-custom-child-template>
+</ren-form-group>
+<ng-content></ng-content>

@@ -1,0 +1,9 @@
+<div (click)="openDialog()" class="renderer-fill">
+  <ng-template renChildHost="launcher"></ng-template>
+</div>
+
+<ren-custom-child-template childKey="content">
+  <ng-template renChildHost="content"> </ng-template>
+</ren-custom-child-template>
+
+<ng-content></ng-content>

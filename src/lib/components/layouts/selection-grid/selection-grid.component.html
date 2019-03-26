@@ -1,0 +1,47 @@
+<mat-grid-list cols="3" rowHeight="120px" fxFlex>
+  <ng-container *ngFor="let tile of tiles">
+    <mat-grid-tile>
+      <button mat-button (click)="openDialog(tile)">
+        <ren-image
+          [src]="tile.imageSrc"
+          [legend]="tile.dialogTitle"
+          objectFit="cover"
+        >
+        </ren-image>
+      </button>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
+
+<ng-container *ngFor="let tile of tiles">
+  <ren-custom-child-template [childKey]="'content-' + tile.id">
+    <div fxLayout="column" [fxLayoutGap]="LARGE_GAP">
+      <ren-text [text]="tile.dialogTitle" type="page-title"></ren-text>
+      <ren-text
+        [text]="tile.dialogTitle"
+        type="paragraph"
+        style="padding: 30px 0;"
+      ></ren-text>
+
+      <div
+        fxLayout="row"
+        fxFlex
+        fxLayoutAlign="center center"
+        [fxLayoutGap]="MEDIUM_GAP"
+        class="renderer-dialog-actions"
+      >
+        <ren-button
+          color="white"
+          appearance="raised"
+          text="CORE.globals.cancel"
+          (click)="closeDialog()"
+        ></ren-button>
+        <ren-button
+          text="CORE.globals.select"
+          appearance="raised"
+          (click)="selectTile()"
+        ></ren-button>
+      </div>
+    </div>
+  </ren-custom-child-template>
+</ng-container>

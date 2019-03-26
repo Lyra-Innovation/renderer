@@ -1,0 +1,44 @@
+<mat-sidenav-container
+  fxFlex
+  class="renderer-sidenav-container"
+  (backdropClick)="sidenav.close()"
+>
+  <mat-sidenav
+    class="renderer-sidenav renderer-sidenav-left"
+    #sidenav
+    position="start"
+    (closedStart)="opened = false"
+    [mode]="mode || mobileQuery.matches ? 'over' : 'side'"
+    [fixedInViewport]="mobileQuery.matches"
+    [opened]="opened"
+  >
+    <ng-template renChildHost="left-sidenav"></ng-template>
+    <mat-nav-list *ngIf="logoutButton">
+      <ren-button
+        class="renderer-logout"
+        mat-list-item
+        icon="launch"
+        text="CORE.globals.login.logout"
+        (click)="logout.emit()"
+      ></ren-button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <ng-container *ngIf="childrenKeys.includes('right-sidenav')">
+    <mat-sidenav
+      class="renderer-sidenav renderer-sidenav-right"
+      position="end"
+      (closedStart)="opened = false"
+      [mode]="mode || mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      [opened]="opened"
+    >
+      <ng-template renChildHost="right-sidenav"></ng-template>
+    </mat-sidenav>
+  </ng-container>
+
+  <mat-sidenav-content class="renderer-sidenav-content" fxFlex>
+    <ng-template renChildHost="content"></ng-template>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,40 @@
+<div fxLayout="row" fxLayoutAlign="start center" [fxLayoutGap]="LARGE_GAP">
+  <ng-container *ngIf="fabIcon">
+      <button
+      type="button"
+      mat-fab
+      ngxFilePicker
+      #myFilePicker="ngxFilePicker"
+      [accept]="accept"
+      [multiple]="multiple"
+      (filePick)="filePick($event)"
+      [filter]="filterFileBeforeReading()"
+      color="accent"
+    >
+    <mat-icon>{{fabIcon}}</mat-icon>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="buttonTitle">
+    <button
+      class="renderer-button"
+      type="button"
+      mat-raised-button
+      ngxFilePicker
+      #myFilePicker="ngxFilePicker"
+      [accept]="accept"
+      [multiple]="multiple"
+      (filePick)="filePick($event)"
+      [filter]="filterFileBeforeReading()"
+    >
+      {{ buttonTitle || 'CORE.components.file-uploader.pick-file' | translate }}
+    </button>
+  </ng-container>
+
+  <ren-text
+    *ngIf="!file"
+    type="label"
+    [text]="label || 'CORE.components.file-uploader-no-file-selected'"
+  ></ren-text>
+  <ren-text *ngIf="file" type="label" [text]="file.name"></ren-text>
+</div>

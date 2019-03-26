@@ -1,0 +1,21 @@
+<ren-card
+  fxLayout="column"
+  [fxLayoutGap]="MEDIUM_GAP"
+  fxLayoutAlign="space-between center"
+>
+<ren-image *ngIf="imageSrc" [src]="imageSrc" [type]="imageType"></ren-image>
+<ren-text *ngIf="title" [text]="title" type="page-title"></ren-text>
+<ren-text *ngIf="subtitle" [text]="subtitle" type="page-subtitle"></ren-text>
+  <ren-text
+    *ngIf="description"
+    [text]="description"
+    type="paragraph"
+  ></ren-text>
+
+  <div class="renderer-setup-page-content">
+    <ng-content></ng-content>
+    <ng-container *ngFor="let childKey of childrenKeys">
+      <ng-template [renChildHost]="childKey"></ng-template>
+    </ng-container>
+  </div>
+</ren-card>

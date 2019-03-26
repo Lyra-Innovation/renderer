@@ -1,0 +1,21 @@
+ren-view-renderer > ren-list-layout {
+  flex-grow: 1;
+}
+
+ren-view-renderer > ren-list-layout > div {
+  flex-grow: 1;
+  height: 100%;
+}
+
+ren-list-layout > div {
+  align-items: unset !important;
+  place-content: unset !important;
+}
+
+.renderer-empty-list-icon {
+  font-size: 72px;
+  height: auto !important;
+  width: auto !important;
+  text-align: center;
+  opacity: 0.6;
+}

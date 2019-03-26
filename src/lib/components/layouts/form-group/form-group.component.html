@@ -1,0 +1,14 @@
+<form
+  [formGroup]="formGroup"
+  (submit)="submitForm()"
+  fxFlex
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <ng-content></ng-content>
+  <div fxLayout="column" class="renderer-fill" [fxLayoutGap]="MEDIUM_GAP">
+    <ng-container *ngFor="let childKey of childrenKeys">
+      <ng-template [renChildHost]="childKey"></ng-template>
+    </ng-container>
+  </div>
+</form>

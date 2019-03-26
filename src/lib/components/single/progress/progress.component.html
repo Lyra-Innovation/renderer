@@ -1,0 +1,17 @@
+<ng-container *ngIf="type === 'spinner'">
+  <mat-progress-spinner
+    class="renderer-progress renderer-progress-spinner"
+    [color]="color"
+    [mode]="mode"
+    [value]="progress"
+  ></mat-progress-spinner>
+</ng-container>
+
+<ng-container *ngIf="type === 'bar'">
+  <mat-progress-bar
+    class="renderer-progress renderer-progress-bar"
+    [color]="color"
+    [mode]="mode"
+    [value]="progress"
+  ></mat-progress-bar>
+</ng-container>

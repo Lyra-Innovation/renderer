@@ -1,0 +1,27 @@
+<mat-toolbar [color]="color" class="renderer-toolbar mat-elevation-z4">
+  <div fxLayout="row" [fxLayoutAlign]="align + ' center'" style="width: 100%;">
+    <ng-container *ngIf="backHref || backButton">
+      <button mat-icon-button (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="menu">
+      <button mat-icon-button (click)="openMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </ng-container>
+
+    <ren-text class="toolbar-title" [text]="title" type="page-title"></ren-text>
+
+    <ng-container *ngIf="menu || backHref || backButton">
+      <button mat-icon-button>
+        <mat-icon></mat-icon>
+      </button>
+    </ng-container>
+
+    <ng-container *ngFor="let childKey of childrenKeys">
+      <ng-template [renChildHost]="childKey"></ng-template>
+    </ng-container>
+    <ng-content></ng-content>
+  </div>
+</mat-toolbar>

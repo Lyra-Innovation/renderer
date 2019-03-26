@@ -1,0 +1,123 @@
+<ng-template #buttonContent>
+  <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+  <span *ngIf="text">
+    {{ text | translate }}
+  </span>
+  <ng-container *ngIf="childrenKeys.length > 0">
+    <ng-template [renChildHost]="childrenKeys[0]"></ng-template>
+  </ng-container>
+  <ng-content></ng-content>
+</ng-template>
+
+<ng-container *ngIf="type !== 'menu'">
+  <ng-container *ngIf="appearance === 'normal'">
+    <button
+      mat-button
+      class="renderer-button renderer-normal-button"
+      [color]="color"
+      [type]="type"
+      [disabled]="disabled || invalid"
+      (click)="onClick($event)"
+      [matTooltip]="tooltip | translate"
+    >
+      <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="appearance === 'raised'">
+    <button
+      mat-raised-button
+      class="renderer-button renderer-raised-button"
+      [color]="color"
+      [type]="type"
+      [disabled]="disabled || invalid"
+      [matTooltip]="tooltip | translate"
+      (click)="onClick($event)"
+    >
+      <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="appearance === 'stroked'">
+    <button
+      mat-stroked-button
+      class="renderer-button renderer-stroked-button"
+      [color]="color"
+      [type]="type"
+      [disabled]="disabled || invalid"
+      (click)="onClick($event)"
+      [matTooltip]="tooltip | translate"
+    >
+      <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="appearance === 'flat'">
+    <button
+      mat-flat-button
+      class="renderer-button renderer-flat-button"
+      [color]="color"
+      [type]="type"
+      [disabled]="disabled || invalid"
+      (click)="onClick($event)"
+      [matTooltip]="tooltip | translate"
+    >
+      <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="appearance === 'fab'">
+    <button
+      mat-fab
+      class="renderer-button renderer-fab-button"
+      [color]="color"
+      [type]="type"
+      [disabled]="disabled || invalid"
+      (click)="onClick($event)"
+      [matTooltip]="tooltip | translate"
+    >
+      <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="appearance === 'icon'">
+    <button
+      mat-icon-button
+      class="renderer-button renderer-icon-button"
+      [type]="type"
+      [color]="color"
+      [disabled]="disabled || invalid"
+      (click)="onClick($event)"
+      [matTooltip]="tooltip | translate"
+    >
+      <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="appearance === 'bottom-bar'">
+    <button
+      mat-raised-button
+      class="renderer-button renderer-bottom-bar"
+      [type]="type"
+      [color]="color"
+      [disabled]="disabled || invalid"
+      (click)="onClick($event)"
+      [matTooltip]="tooltip | translate"
+    >
+      <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+    </button>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="type === 'menu'">
+  <button
+    mat-menu-item
+    class="renderer-button renderer-menu-button"
+    type="button"
+    [disabled]="disabled || invalid"
+    (click)="onClick($event)"
+    [matTooltip]="tooltip | translate"
+    >
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
+</ng-container>

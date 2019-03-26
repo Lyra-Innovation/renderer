@@ -1,0 +1,10 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  [style.backround]="'url(' + backgroundSrc + ')'"
+  class="shell"
+>
+  <div fxFlex class="renderer-mobile-shell" [style.max-width]="getMaxWidth()">
+    <router-outlet></router-outlet>
+  </div>
+</div>

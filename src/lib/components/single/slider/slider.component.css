@@ -1,0 +1,17 @@
+::ng-deep .mat-slider-thumb-label {
+  transform: rotate(45deg) !important;
+  border-radius: 50% 50% 0 !important;
+}
+
+::ng-deep .mat-slider-thumb {
+  transform: scale(0) !important;
+}
+
+::ng-deep .mat-slider-thumb-label-text {
+  opacity: 1 !important;
+}
+
+.renderer-silder-disabled {
+  opacity: 0.8;
+  pointer-events: none;
+}

@@ -1,0 +1,35 @@
+<mat-form-field
+  [appearance]="appearance"
+  [floatLabel]="floatLabel"
+  [color]="color"
+  class="renderer-fill renderer-formfield"
+>
+  <mat-label *ngIf="label" class="renderer-formfield-label">
+    {{ label | translate }}
+  </mat-label>
+
+  <textarea
+    matInput
+    class="renderer-textarea"
+    [placeholder]="placeholder"
+    [formControl]="formControl"
+    [required]="required"
+    [rows]="rows"
+    [cdkTextareaAutosize]="autosize"
+    [cdkAutosizeMinRows]="autosizeMinRows"
+    [cdkAutosizeMaxRows]="autosizeMaxRows"
+  ></textarea>
+
+  <mat-icon *ngIf="prefixIcon" matPrefix>{{ prefixIcon }}</mat-icon>
+  <mat-icon *ngIf="suffixIcon" matSuffix>{{ suffixIcon }}</mat-icon>
+
+  <mat-hint *ngIf="hint" class="renderer-formfield-hint">
+    {{ hint | translate }}
+  </mat-hint>
+  <mat-error
+    *ngIf="!formControl.valid && getErrorMessage()"
+    class="renderer-formfield-error"
+  >
+    {{ getErrorMessage() | translate }}
+  </mat-error>
+</mat-form-field>

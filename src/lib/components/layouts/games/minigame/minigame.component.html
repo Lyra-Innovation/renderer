@@ -1,0 +1,39 @@
+<div fxFlex fxLayout="column" [fxLayoutGap]="MEDIUM_GAP">
+  <ng-content></ng-content>
+
+  <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="80%" fxLayout="column" [fxLayoutGap]="MEDIUM_GAP">
+      <ng-container *ngIf="time">
+        <div fxLayout="column" [fxLayoutGap]="SMALL_GAP">
+          <ren-text
+            text="CORE.components.minigame.remaining-time"
+            type="label"
+          ></ren-text>
+
+          <mat-progress-bar
+            [color]="color"
+            mode="determinate"
+            [value]="percentageRemaining()"
+          ></mat-progress-bar>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="showScore">
+        <div fxLayout="column" [fxLayoutGap]="SMALL_GAP">
+          <ren-text
+            text="CORE.components.minigame.score"
+            type="label"
+          ></ren-text>
+
+          <mat-progress-bar
+            color="primary"
+            mode="determinate"
+            [value]="getScorePercentage()"
+          ></mat-progress-bar>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-template renChildHost="game"></ng-template>
+</div>

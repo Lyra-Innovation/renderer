@@ -1,0 +1,32 @@
+<ng-container *ngIf="direction === 'horizontal'">
+  <mat-horizontal-stepper
+    [selectedIndex]="activeStepIndex"
+    [labelPosition]="labelPosition"
+    [ngClass]="{ 'disable-clicks': !clickable }"
+  >
+    <ng-content></ng-content>
+    <ng-container *ngFor="let label of labels">
+      <mat-step [label]="label | translate">
+        <ng-container *ngIf="childrenKeys.includes(label)">
+          <ng-template [renChildHost]="label"></ng-template>
+        </ng-container>
+      </mat-step>
+    </ng-container>
+  </mat-horizontal-stepper>
+</ng-container>
+
+<ng-container *ngIf="direction === 'vertical'">
+  <mat-vertical-stepper
+    [selectedIndex]="activeStepIndex"
+    [ngClass]="{ 'disable-clicks': !clickable }"
+  >
+    <ng-content></ng-content>
+    <ng-container *ngFor="let label of labels">
+      <mat-step [label]="label | translate">
+        <ng-container *ngIf="childrenKeys.includes(label)">
+          <ng-template [renChildHost]="label"></ng-template>
+        </ng-container>
+      </mat-step>
+    </ng-container>
+  </mat-vertical-stepper>
+</ng-container>

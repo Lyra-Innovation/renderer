@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutAlign="center center" [fxLayoutGap]="MEDIUM_GAP" class="renderer-error">
+  <mat-icon class="renderer-error-icon" color="warn">error_outline</mat-icon>
+  <ren-text
+    class="renderer-error-text"
+    type="paragraph"
+    [text]="error['message'] ? error['message'] : error"
+    color="warn"
+  ></ren-text>
+</div>

@@ -1,0 +1,12 @@
+<div fxLayout="column" [fxLayoutGap]="SMALL_GAP">
+  <img
+    [src]="src"
+    [ngStyle]="{ 'object-fit': objectFit }"
+    class="renderer-image"
+    [ngClass]="'renderer-image-' + type"
+  />
+
+  <ng-container *ngIf="legend">
+    <ren-text [text]="legend" type="label"></ren-text>
+  </ng-container>
+</div>

@@ -1,0 +1,18 @@
+<mat-radio-group
+  [formControl]="formControl"
+  [labelPosition]="labelPosition"
+  [required]="required"
+>
+  <div [fxLayout]="direction">
+    <ng-container *ngFor="let item of options">
+      <mat-radio-button
+        [value]="item.id"
+        [color]="item.color || color"
+        [attr.checked]="item.checked"
+        [attr.disabled]="item.disabled"
+      >
+        {{ item.name | translate }}
+      </mat-radio-button>
+    </ng-container>
+  </div>
+</mat-radio-group>

@@ -1,0 +1,35 @@
+<ng-container *ngIf="type === 'simple'">
+  <mat-list class="renderer-list renderer-scrollable">
+    <ng-content></ng-content>
+    <ng-container *ngFor="let key of childrenKeys; let idx = index">
+      <mat-divider *ngIf="idx !== 0"></mat-divider>
+
+      <mat-list-item>
+        <ng-template [renChildHost]="key"></ng-template>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</ng-container>
+
+<ng-container *ngIf="type === 'nav'">
+  <mat-nav-list class="renderer-list renderer-scrollable">
+    <ng-content></ng-content>
+    <ng-container *ngFor="let key of childrenKeys; let idx = index">
+      <mat-divider *ngIf="idx !== 0"></mat-divider>
+
+      <a mat-list-item> <ng-template [renChildHost]="key"></ng-template> </a>
+    </ng-container>
+  </mat-nav-list>
+</ng-container>
+
+<ng-container *ngIf="childrenKeys.length === 0">
+  <div
+    fxFill
+    fxLayout="column"
+    [fxLayoutGap]="MEDIUM_GAP"
+    fxLayoutAlign="center center"
+  >
+    <mat-icon class="renderer-empty-list-icon">info</mat-icon>
+    <ren-text [text]="emptyText"></ren-text>
+  </div>
+</ng-container>

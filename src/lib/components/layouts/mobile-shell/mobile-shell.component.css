@@ -1,0 +1,11 @@
+.renderer-mobile-shell {
+  height: 100%;
+
+  display: flex;
+  position: relative !important;
+}
+
+.shell {
+  height: 100%;
+  overflow: auto;
+}

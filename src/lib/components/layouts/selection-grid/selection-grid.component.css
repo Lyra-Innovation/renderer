@@ -1,0 +1,7 @@
+ren-selection-grid {
+  width: 100%;
+}
+
+ren-selection-grid .mat-button {
+  padding: 0px;
+}

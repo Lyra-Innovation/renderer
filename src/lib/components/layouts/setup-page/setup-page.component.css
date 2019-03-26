@@ -1,0 +1,13 @@
+.renderer-setup-page-content {
+  width: 100%;
+  padding-bottom: 16px;
+  flex-grow: 1;
+}
+
+.renderer-setup-page-content ren-form-group {
+  display: contents !important;
+}
+
+.renderer-setup-page-content renderer-form-widget:last-of-type {
+  flex-grow: 1;
+}

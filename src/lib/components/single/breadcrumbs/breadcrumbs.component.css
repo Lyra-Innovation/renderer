@@ -1,0 +1,8 @@
+.renderer-breadcrumb-active, .renderer-breadcrumb-routeless.renderer-breadcrumb-active {
+  font-weight: 900;
+  opacity: 1;
+}
+
+.renderer-breadcrumb-routeless {
+  opacity: 0.8;
+}

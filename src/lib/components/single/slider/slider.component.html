@@ -1,0 +1,21 @@
+<div fxLayout="column">
+  <ren-text
+    *ngIf="label"
+    [text]="label"
+    type="label"
+    style="margin-bottom: 20px;"
+  ></ren-text>
+  <mat-slider
+    class="renderer-slider"
+    [max]="max"
+    [min]="min"
+    [ngClass]="disabled ? 'renderer-silder-disabled' : ''"
+    [value]="initialValue"
+    [step]="step"
+    [thumbLabel]="thumbLabel"
+    (change)="valueChanges.emit($event.value)"
+    [color]="color"
+    [tickInterval]="showTicks ? 1 : null"
+  >
+  </mat-slider>
+</div>

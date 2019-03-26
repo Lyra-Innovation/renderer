@@ -1,0 +1,259 @@
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Input
+} from '@angular/core';
+import { BaseComponent } from '../../../base.component';
+import { Minigame } from '../minigame';
+
+@Component({
+  selector: 'ren-zop-game',
+  templateUrl: './zop-game.component.html',
+  styleUrls: ['./zop-game.component.css']
+})
+export class ZopGameComponent extends BaseComponent
+  implements Minigame, AfterViewInit, OnDestroy {
+  @Input()
+  maxScore: number = 15;
+
+  @ViewChild('zopCanvas')
+  canvas: ElementRef;
+
+  @Output()
+  gameFinished = new EventEmitter<void>();
+
+  interval: any;
+
+  score: number = 0;
+
+  constructor(protected changeDetectorRef: ChangeDetectorRef) {
+    super();
+  }
+
+  getScore(totalTime: number, timeSpent: number): { win: boolean; score: any } {
+    return {
+      win: this.score >= this.getMaxScore(),
+      score: this.score
+    };
+  }
+
+  ngAfterViewInit(): void {
+    this.initGame();
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    clearInterval(this.interval);
+  }
+
+  getMaxScore(): number {
+    return this.maxScore;
+  }
+
+  setScore(score: number) {
+    this.score = score;
+    if (score >= this.getMaxScore()) {
+      this.gameFinished.emit();
+    }
+  }
+
+  // tslint:disable:no-bitwise
+
+  initGame() {
+    const canvasElement = <HTMLCanvasElement>this.canvas.nativeElement;
+    const ctx = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
+    ctx.canvas.width = ctx.canvas.clientWidth;
+    ctx.canvas.height = ctx.canvas.clientHeight;
+
+    let X, Y;
+
+    let score = 0;
+    let highestRow = 0;
+    let isSelecting = 0;
+
+    // initialize grid
+    const W = ctx.canvas.width;
+    const H = ctx.canvas.height;
+    const colors = ['#e43', '#92a', '#29e', '#4a5', '#f90'];
+    const dotSize = Math.min(W, H) / 7;
+    const L = W / 2 - dotSize * 3 + dotSize / 2;
+    const R = H / 2 - dotSize * 3;
+    const dots = [];
+    let selected = [];
+    for (let x = 0; x < 6; x++) {
+      for (let y = 0; y < 6; y++) {
+        dots.push({
+          o: colors[(Math.random() * 5) | 0],
+          Y: R + y * dotSize,
+          x: L + x * dotSize,
+          y: R + y * dotSize,
+          r: y,
+          ctx: x
+        });
+      }
+    }
+
+    canvasElement.addEventListener('mousedown', () => (isSelecting = 1));
+
+    const touchend = function(setScore) {
+      // ignore single selections
+      if (!selected[1]) {
+        selected = [];
+      }
+
+      // respawn dots above board
+      for (let i = 0; i < selected.length; i++) {
+        const dot = selected[i];
+        if (dot.r >= 0) {
+          setScore(score++);
+          dot.r -= highestRow + 1;
+          dot.y = R + dot.r * dotSize;
+          dot.o = colors[(Math.random() * 5) | 0];
+        }
+      }
+
+      highestRow = isSelecting = 0;
+      selected = [];
+    };
+    canvasElement.addEventListener('touchend', () =>
+      touchend(s => this.setScore(s))
+    );
+    canvasElement.addEventListener('mouseup', () =>
+      touchend(s => this.setScore(s))
+    );
+
+    const move = function(event) {
+      const rect = event.target.getBoundingClientRect();
+      // normalize touch inputs
+      if (event.pageX) {
+        X = event.pageX - rect.left;
+        Y = event.pageY - rect.top;
+      } else {
+        X = event.touches[0].pageX - rect.left;
+        isSelecting = Y = event.touches[0].pageY - rect.top;
+      }
+
+      // select dots
+      if (isSelecting) {
+        for (let i = 0; i < dots.length; i++) {
+          const dot = dots[i];
+
+          // skip if dot is not the same color or isn't neighboring
+          if (
+            selected.length === 0 ||
+            (selected[0] &&
+              selected[0].o === dot.o &&
+              (selected[0] &&
+                Math.abs(
+                  Math.abs(selected[0].r - dot.r) -
+                    Math.abs(selected[0].ctx - dot.ctx)
+                ) === 1))
+          ) {
+            if (
+              Math.abs(X - dot.x) < dotSize / 2 &&
+              Math.abs(Y - dot.y) < dotSize / 2
+            ) {
+              if (!selected.includes(dot)) {
+                selected.unshift(dot);
+                highestRow = Math.max(dot.r, highestRow);
+              } else if (selected[1] === dot) {
+                selected.shift();
+              }
+            }
+          }
+        }
+      }
+    };
+    canvasElement.addEventListener('mousemove', e => move(e));
+    canvasElement.addEventListener('touchmove', e => move(e));
+
+    this.interval = setInterval(function() {
+      // clear canvas
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineWidth = dotSize / 6;
+      ctx.lineJoin = 'round';
+
+      // physics and painting
+      for (let i = 0; i < dots.length; i++) {
+        const dot = dots[i];
+
+        // if p doesn't have a neighbor below, move it down
+        let hasBelow = 0;
+        for (let j = 0; j < dots.length; j++) {
+          const dot1 = dots[j];
+          if (dot.r + 1 === dot1.r && dot.ctx === dot1.ctx) {
+            hasBelow = 1;
+          }
+        }
+        if (!hasBelow && dot.r !== 5) {
+          dot.r++;
+          dot.Y = R + dot.r * dotSize;
+        }
+
+        // falling animation
+        if (dot.y !== dot.Y) {
+          const dir = dot.y > dot.Y ? -1 : 1;
+          dot.y += dot.T * dir;
+          dot.T *= dot.s && !dot.t ? 0.5 : 1.5;
+
+          if (~dir && dot.y >= dot.Y) {
+            dot.y = dot.Y;
+          } else if (!~dir && dot.y <= dot.Y) {
+            dot.y = dot.Y;
+          }
+
+          // flidot udot/down
+          if (!dot.s && !dot.t && dot.y === dot.Y) {
+            dot.s = 1;
+            dot.Y -= dotSize / 3;
+            dot.T = dotSize / 5;
+          } else if (dot.s && !dot.t && dot.y === dot.Y) {
+            dot.t = 1;
+            dot.T = dotSize / 15;
+            dot.Y += dotSize / 3;
+          }
+        } else {
+          dot.T = dotSize / 15;
+          dot.t = dot.s = 0;
+        }
+
+        // paint
+        ctx.strokeStyle = dot.o;
+        if (~selected.indexOf(dot)) {
+          ctx.strokeRect(
+            dot.x - dotSize / 3,
+            dot.y - dotSize / 3,
+            dotSize / 1.5,
+            dotSize / 1.5
+          );
+        }
+        ctx.strokeRect(
+          dot.x - dotSize / 4,
+          dot.y - dotSize / 4,
+          dotSize / 2,
+          dotSize / 2
+        );
+      }
+
+      // paint selection lines
+      if (selected[0]) {
+        ctx.strokeStyle = selected[0].o;
+        ctx.beginPath();
+        ctx.moveTo(X, Y);
+        for (let i = 0; i < selected.length; i++) {
+          const dot = selected[i];
+          ctx.lineTo(dot.x, dot.y);
+        }
+        ctx.stroke();
+      }
+    }, 33);
+  }
+}

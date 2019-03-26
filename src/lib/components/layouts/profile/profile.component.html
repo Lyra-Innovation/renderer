@@ -1,0 +1,15 @@
+<div fxLayout="column" [fxLayoutGap]="LARGE_GAP">
+  <div fxLayout="row" fxLayoutAlign="center center" [fxLayoutGap]="LARGE_GAP">
+    <div fxLayout="column" fxFlex>
+      <h3>{{ name }} {{ surname }}</h3>
+      <p>{{ description }}</p>
+    </div>
+
+    <ren-image [src]="imageSrc ? imageSrc : '/assets/completa_tu_perfil.png'" type="avatar"></ren-image>
+  </div>
+
+  <mat-divider [inset]="true"></mat-divider>
+
+  <ng-template renChildHost="content"></ng-template>
+  <ng-content></ng-content>
+</div>

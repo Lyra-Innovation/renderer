@@ -1,0 +1,15 @@
+<mat-tab-group
+  class="renderer-tabs"
+  [color]="color"
+  [backgroundColor]="backgroundColor"
+  mat-stretch-tabs
+  [headerPosition]="headerPosition"
+>
+  <ng-content></ng-content>
+  <mat-tab
+    *ngFor="let label of _labels; let idx = index"
+    [label]="label | translate"
+  >
+    <ng-template [renChildHost]="childrenKeys[idx]"></ng-template>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,21 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+::ng-deep .renderer-sidenav {
+  button {
+    width: 100%;
+    text-align: left;
+  }
+
+  .renderer-logout {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+    .renderer-button {
+      height: 56px;
+      border-radius: 0;
+    }
+  }
+}

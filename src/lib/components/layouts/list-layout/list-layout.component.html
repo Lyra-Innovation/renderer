@@ -1,0 +1,11 @@
+<div
+  [fxLayout]="direction"
+  [fxLayoutAlign]="align"
+  [fxLayoutGap]="gap"
+  [ngClass]="scrollable ? 'renderer-scrollable' : ''"
+>
+  <ng-content></ng-content>
+  <ng-container *ngFor="let key of childrenKeys">
+    <ng-template [renChildHost]="key"></ng-template>
+  </ng-container>
+</div>

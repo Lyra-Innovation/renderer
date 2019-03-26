@@ -1,0 +1,3 @@
+.disable-clicks {
+  pointer-events: none;
+}

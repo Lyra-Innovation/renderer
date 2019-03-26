@@ -1,0 +1,5 @@
+<ng-container *ngFor="let childKey of childrenKeys; let idx = index">
+  <ng-container *ngIf="idx === activeStep">
+    <ng-template [renChildHost]="childKey"></ng-template>
+  </ng-container>
+</ng-container>

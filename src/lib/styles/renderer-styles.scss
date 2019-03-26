@@ -1,0 +1,165 @@
+/** Globals */
+
+@import 'animations';
+
+.absolute-middle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+pre-view-container,
+ren-view-renderer {
+  display: flex;
+  flex-grow: 1;
+}
+
+.renderer-page-title {
+  font-size: 24px;
+  font-weight: 900;
+  display: block;
+  text-align: center;
+}
+
+.renderer-page-subtitle {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.renderer-content-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.renderer-content-subtitle {
+  font-weight: bold;
+}
+
+.renderer-paragraph {
+}
+
+.renderer-label {
+}
+
+.renderer-sublabel {
+  opacity: 0.6;
+}
+
+.renderer-button {
+}
+
+/** Single components */
+
+.renderer-formfield {
+}
+
+.renderer-text {
+}
+
+.renderer-toolbar {
+}
+
+.renderer-slider {
+}
+
+.renderer-image {
+}
+
+.renderer-formfield {
+  .renderer-formfield-label {
+  }
+
+  .renderer-formfield-hint {
+  }
+
+  .renderer-formfield-error {
+  }
+}
+
+.renderer-textarea {
+}
+.renderer-input {
+}
+
+.renderer-chip-list {
+}
+
+.renderer-chip {
+}
+
+.renderer-fab-button {
+}
+
+.renderer-normal-button {
+}
+
+.renderer-raised-button {
+}
+.renderer-stroked-button {
+}
+.renderer-flat-button {
+}
+
+.renderer-breadcrumb {
+}
+
+/** Layout components */
+
+.renderer-layout {
+  display: flex;
+  place-content: center;
+  box-sizing: border-box;
+  align-items: center;
+
+  overflow-y: auto;
+}
+
+.renderer-fill {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.renderer-sidenav-container {
+  .renderer-sidenav {
+  }
+  .renderer-sidenav-left {
+  }
+  .renderer-sidenav-right {
+  }
+  .renderer-sidenav-content {
+  }
+}
+
+.renderer-error {
+}
+
+.renderer-error-icon {
+}
+.renderer-error-text {
+}
+
+.renderer-progress {
+}
+.renderer-progress-spinner {
+}
+.renderer-progress-bar {
+}
+
+.renderer-scrollable {
+  max-height: 100%;
+}
+
+.renderer-scrollable > .renderer-layout:not(ren-tabs) {
+  display: block !important;
+  width: 100%;
+  overflow: visible;
+}
+
+.mat-card.renderer-shrinked-card,
+.renderer-shrinked-card {
+  overflow: hidden;
+  padding: 0;
+}
