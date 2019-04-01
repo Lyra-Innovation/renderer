@@ -125,7 +125,8 @@ export class ViewRendererComponent implements OnInit {
           data.params = this.buildEventParams(
             data.params,
             $event,
-            component.$me
+            component.$me,
+            component
           );
 
           if (eventData.action) {
@@ -159,23 +160,33 @@ export class ViewRendererComponent implements OnInit {
     return componentData;
   }
 
-  private buildEventParams(params: any, $event: any, $me: number): EventData {
+  private buildEventParams(
+    params: any,
+    $event: any,
+    $me: number,
+    component: any
+  ): EventData {
     if (Array.isArray(params)) {
       for (let i = 0; i < params.length; i++) {
-        params[i] = this.buildEventParams(params[i], $event, $me);
+        params[i] = this.buildEventParams(params[i], $event, $me, component);
       }
-    } else if (typeof params === 'object') {
+    } else if (typeof params === 'object' && params) {
       for (const key of Object.keys(params)) {
-        params[key] = this.buildEventParams(params[key], $event, $me);
+        params[key] = this.buildEventParams(
+          params[key],
+          $event,
+          $me,
+          component
+        );
       }
     } else if (typeof params === 'string') {
-      params = this.buildParam(params, $event, $me);
+      params = this.buildParam(params, $event, $me, component);
     }
 
     return params;
   }
 
-  private buildParam(param: any, $event: any, $me: number) {
+  private buildParam(param: any, $event: any, $me: number, local: any) {
     try {
       // tslint:disable-next-line:no-eval
       return eval(param);
