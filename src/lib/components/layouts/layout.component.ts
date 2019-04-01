@@ -100,26 +100,35 @@ export abstract class LayoutComponent<CHILDREN extends string>
         const ascending = this.orderChildrenBy.ascending
           ? this.orderChildrenBy.ascending
           : false;
-        this.childrenKeys.sort((key1: string, key2: string) => {
-          let property1 = this.childrenData[key1][property];
-          let property2 = this.childrenData[key2][property];
+        this.childrenKeys = this.childrenKeys.sort(
+          (key1: string, key2: string) => {
+            let property1 = this.childrenData[key1].values[property];
+            let property2 = this.childrenData[key2].values[property];
 
-          if (typeof property1 === 'string') {
-            property1 = parseInt(property1, 10);
-          }
-          if (typeof property2 === 'string') {
-            property2 = parseInt(property2, 10);
-          }
+            if (typeof property1 === 'string') {
+              property1 = parseInt(property1, 10);
+            }
+            if (typeof property2 === 'string') {
+              property2 = parseInt(property2, 10);
+            }
 
-          if (ascending) {
-            return property1 - property2;
-          } else {
-            return property2 - property1;
+            if (ascending) {
+              return property1 - property2;
+            } else {
+              return property2 - property1;
+            }
           }
-        });
+        );
       } else {
-        // tslint:disable-next-line:no-eval
-        this.childrenKeys.sort(eval(this.orderChildrenBy.compare));
+        this.childrenKeys = this.childrenKeys
+          .map(key => {
+            const child = this.childrenData[key];
+            child['key'] = key;
+            return child;
+          })
+          // tslint:disable-next-line:no-eval
+          .sort(eval(this.orderChildrenBy.compare))
+          .map(child => child['key']);
       }
     }
   }
