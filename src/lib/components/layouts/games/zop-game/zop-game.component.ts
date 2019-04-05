@@ -24,6 +24,11 @@ export class ZopGameComponent extends BaseComponent
   @Input()
   maxScore: number = 15;
 
+  @Input()
+  images: string;
+  @Input()
+  colors: string;
+
   @ViewChild('zopCanvas')
   canvas: ElementRef;
 
@@ -82,16 +87,25 @@ export class ZopGameComponent extends BaseComponent
     // initialize grid
     const W = ctx.canvas.width;
     const H = ctx.canvas.height;
-    const colors = ['#e43', '#92a', '#29e', '#4a5', '#f90'];
     const dotSize = Math.min(W, H) / 7;
     const L = W / 2 - dotSize * 3 + dotSize / 2;
     const R = H / 2 - dotSize * 3;
+
+    const colorsAux = this.colors.split(',');
+    const colors = {};
+    const images = this.images.split(',').map((img, index) => {
+      const image = new Image();
+      image.src = img;
+      colors[img] = colorsAux[index];
+      return image;
+    });
+
     const dots = [];
     let selected = [];
     for (let x = 0; x < 6; x++) {
       for (let y = 0; y < 6; y++) {
         dots.push({
-          o: colors[(Math.random() * 5) | 0],
+          o: images[(Math.random() * 5) | 0],
           Y: R + y * dotSize,
           x: L + x * dotSize,
           y: R + y * dotSize,
@@ -116,7 +130,7 @@ export class ZopGameComponent extends BaseComponent
           setScore(score++);
           dot.r -= highestRow + 1;
           dot.y = R + dot.r * dotSize;
-          dot.o = colors[(Math.random() * 5) | 0];
+          dot.o = images[(Math.random() * 5) | 0];
         }
       }
 
@@ -174,6 +188,82 @@ export class ZopGameComponent extends BaseComponent
     };
     canvasElement.addEventListener('mousemove', e => move(e));
     canvasElement.addEventListener('touchmove', e => move(e));
+    /**
+     * By Ken Fyrstenberg Nilsen
+     *
+     * drawImageProp(context, image [, x, y, width, height [,offsetX, offsetY]])
+     *
+     * If image and context are only arguments rectangle will equal canvas
+     */
+    function drawImageProp(
+      context,
+      img,
+      x,
+      y,
+      w,
+      h,
+      offsetX = 0.5,
+      offsetY = 0.5
+    ) {
+      if (arguments.length === 2) {
+        x = y = 0;
+        w = context.canvas.width;
+        h = context.canvas.height;
+      }
+
+      // default offset is center
+      offsetX = typeof offsetX === 'number' ? offsetX : 0.5;
+      offsetY = typeof offsetY === 'number' ? offsetY : 0.5;
+
+      // keep bounds [0.0, 1.0]
+      if (offsetX < 0) {
+        offsetX = 0;
+      }
+      if (offsetY < 0) {
+        offsetY = 0;
+      }
+      if (offsetX > 1) {
+        offsetX = 1;
+      }
+      if (offsetY > 1) {
+        offsetY = 1;
+      }
+
+      // tslint:disable:prefer-const
+      let iw = img.width,
+        ih = img.height,
+        r = Math.min(w / iw, h / ih),
+        nw = iw * r, // new prop. width
+        nh = ih * r, // new prop. height
+        cx,
+        cy,
+        cw,
+        ch,
+        ar = 1;
+
+      // decide which gap to fill
+      // tslint:disable:curly
+      if (nw < w) ar = w / nw;
+      if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh; // updated
+      nw *= ar;
+      nh *= ar;
+
+      // calc source rectangle
+      cw = iw / (nw / w);
+      ch = ih / (nh / h);
+
+      cx = (iw - cw) * offsetX;
+      cy = (ih - ch) * offsetY;
+
+      // make sure source rectangle is valid
+      if (cx < 0) cx = 0;
+      if (cy < 0) cy = 0;
+      if (cw > iw) cw = iw;
+      if (ch > ih) ch = ih;
+
+      // fill image in dest. rectangle
+      context.drawImage(img, cx, cy, cw, ch, x, y, w, h);
+    }
 
     this.interval = setInterval(function() {
       // clear canvas
@@ -226,26 +316,21 @@ export class ZopGameComponent extends BaseComponent
         }
 
         // paint
-        ctx.strokeStyle = dot.o;
-        if (~selected.indexOf(dot)) {
-          ctx.strokeRect(
-            dot.x - dotSize / 3,
-            dot.y - dotSize / 3,
-            dotSize / 1.5,
-            dotSize / 1.5
-          );
-        }
-        ctx.strokeRect(
+        drawImageProp(
+          ctx,
+          dot.o,
           dot.x - dotSize / 4,
           dot.y - dotSize / 4,
-          dotSize / 2,
-          dotSize / 2
+          dotSize / 1.5,
+          dotSize / 1.5
         );
+        ctx.save();
+        ctx.restore();
       }
 
       // paint selection lines
       if (selected[0]) {
-        ctx.strokeStyle = selected[0].o;
+        ctx.strokeStyle = '#00436d';
         ctx.beginPath();
         ctx.moveTo(X, Y);
         for (let i = 0; i < selected.length; i++) {
