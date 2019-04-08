@@ -1,8 +1,3 @@
 ren-text {
   text-align: center;
 }
-
-ren-text {
-  overflow-wrap: break-word;
-  white-space: pre-line;
-}

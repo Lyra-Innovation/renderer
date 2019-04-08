@@ -57,6 +57,8 @@ ren-view-renderer {
 }
 
 .renderer-text {
+  overflow-wrap: break-word;
+  white-space: pre-line;
 }
 
 .renderer-toolbar {
