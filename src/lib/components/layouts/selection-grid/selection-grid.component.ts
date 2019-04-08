@@ -70,6 +70,7 @@ export class SelectionGridComponent extends LayoutComponent<any>
 
   ngOnInit() {
     super.ngOnInit();
+    this.ids = this.ids.filter(id => id !== null);
     this.tiles = new Array(this.ids.length);
     for (let i = 0; i < this.ids.length; i++) {
       this.tiles[i] = {
