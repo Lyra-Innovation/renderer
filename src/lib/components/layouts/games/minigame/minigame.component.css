@@ -1,4 +1,4 @@
 
 ren-minigame {
-  overflow: visible;
+  overflow: visible !important;
 }
