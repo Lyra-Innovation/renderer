@@ -5,3 +5,12 @@ ren-selection-grid {
 ren-selection-grid .mat-button {
   padding: 0px;
 }
+
+.tile-button {
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  place-content: start;
+  display: flex;
+}

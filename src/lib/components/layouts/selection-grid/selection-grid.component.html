@@ -1,8 +1,9 @@
-<mat-grid-list cols="3" rowHeight="120px" fxFlex>
+<mat-grid-list cols="3" rowHeight="160px" fxFlex>
   <ng-container *ngFor="let tile of tiles">
-    <mat-grid-tile>
-      <button mat-button (click)="openDialog(tile)">
+    <mat-grid-tile fxFlex>
+      <button mat-button class="tile-button" (click)="openDialog(tile)">
         <ren-image
+          type="avatar"
           [src]="tile.imageSrc"
           [legend]="tile.dialogTitle"
           objectFit="cover"
@@ -18,9 +19,14 @@
     <div fxLayout="column" [fxLayoutGap]="LARGE_GAP">
       <ren-text [text]="tile.dialogTitle" type="page-title"></ren-text>
       <ren-text
-        [text]="tile.dialogTitle"
+        [text]="tile.dialogText"
         type="paragraph"
         style="padding: 30px 0;"
+      ></ren-text>
+      <ren-text
+        *ngIf="tile.dialogFooter"
+        [text]="tile.dialogFooter"
+        type="paragraph"
       ></ren-text>
 
       <div
@@ -37,6 +43,7 @@
           (click)="closeDialog()"
         ></ren-button>
         <ren-button
+          *ngIf="selectable"
           text="CORE.globals.select"
           appearance="raised"
           (click)="selectTile()"

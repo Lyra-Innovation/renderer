@@ -34,9 +34,15 @@ export class SelectionGridComponent extends LayoutComponent<any>
   dialogText: string[];
 
   @Input()
+  dialogFooter: string[];
+
+  @Input()
   config: MatDialogConfig = {
     disableClose: true
   };
+
+  @Input()
+  selectable: boolean = true;
 
   /** Outputs */
   @Output()
@@ -49,6 +55,7 @@ export class SelectionGridComponent extends LayoutComponent<any>
     imageSrc: string;
     dialogTitle: string;
     dialogText: string;
+    dialogFooter: string;
   }> = [];
 
   dialogRef: MatDialogRef<any>;
@@ -69,7 +76,8 @@ export class SelectionGridComponent extends LayoutComponent<any>
         id: this.ids[i],
         imageSrc: this.images[i],
         dialogTitle: this.dialogTitle[i],
-        dialogText: this.dialogText[i]
+        dialogText: this.dialogText[i],
+        dialogFooter: this.dialogFooter ? this.dialogFooter[i] : null
       };
     }
   }
