@@ -42,22 +42,11 @@ export class QuestionsGameComponent extends BaseComponent implements Minigame {
     super();
   }
 
-  getOptions() {
-    return this.answersIds.map((id, index) => ({
-      id: id,
-      name: this.answers[index]
-    }));
-  }
-
   getScore(totalTime: number, timeSpent: number): { win: boolean; score: any } {
-    const correctAnswerIndex = this.answersIds.findIndex(
-      (id, index) => this.correct[index]
-    );
     const win =
       this.answerSubmitted &&
       totalTime > timeSpent &&
-      correctAnswerIndex ===
-        this.answersIds.findIndex(id => id === this.selectedAnswerId);
+      this.answers.find(answer => answer.id === this.selectedAnswerId).correct;
     return {
       win: win,
       score: win
