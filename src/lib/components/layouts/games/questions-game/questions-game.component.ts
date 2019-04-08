@@ -9,6 +9,12 @@ import { BaseComponent } from '../../../base.component';
 import { Minigame } from '../minigame';
 import { FormGroup } from '@angular/forms';
 
+export interface Answer {
+  id: string;
+  answer: string;
+  correct: boolean;
+}
+
 @Component({
   selector: 'ren-questions-game',
   templateUrl: './questions-game.component.html',
@@ -22,13 +28,7 @@ export class QuestionsGameComponent extends BaseComponent implements Minigame {
   question: string;
 
   @Input()
-  answersIds: string[];
-
-  @Input()
-  answers: string[];
-
-  @Input()
-  correct: boolean[];
+  answers: Answer[];
 
   @Output()
   gameFinished = new EventEmitter<void>();
