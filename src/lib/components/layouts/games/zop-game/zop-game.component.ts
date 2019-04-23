@@ -175,6 +175,10 @@ export class ZopGameComponent extends BaseComponent
         Y = event.pageY - rect.top;
       }
 
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        Y *= 4;
+      }
+
       // select dots
       if (isSelecting) {
         for (let i = 0; i < dots.length; i++) {
