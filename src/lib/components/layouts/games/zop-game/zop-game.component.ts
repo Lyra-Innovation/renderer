@@ -116,7 +116,11 @@ export class ZopGameComponent extends BaseComponent
     }
 
     canvasElement.addEventListener('mousedown', () => (isSelecting = 1), false);
-    canvasElement.addEventListener('touchstart', () => (isSelecting = 1), false);
+    canvasElement.addEventListener(
+      'touchstart',
+      () => (isSelecting = 1),
+      false
+    );
 
     const touchend = function(setScore) {
       // ignore single selections
@@ -151,6 +155,7 @@ export class ZopGameComponent extends BaseComponent
 
     const move = function(event) {
       const rect = event.target.getBoundingClientRect();
+      alert(rect.top);
       // normalize touch inputs
       if (event.pageX) {
         X = event.pageX - rect.left;
