@@ -158,9 +158,11 @@ export class ZopGameComponent extends BaseComponent
       alert(event.touches[0].pageX);
       // normalize touch inputs
       if (event.pageX) {
+        alert('hi' + event.pageY + rect.top);
         X = event.pageX - rect.left;
         Y = event.pageY - rect.top;
       } else {
+        alert('hi2' + event.touches[0].pageY + rect.top + '/' + event.targetTouches[0].pageY);
         X = event.touches[0].pageX - rect.left;
         isSelecting = Y = event.touches[0].pageY - rect.top;
       }
