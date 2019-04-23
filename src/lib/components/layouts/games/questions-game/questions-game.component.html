@@ -1,7 +1,7 @@
 <div fxLayout="column" [fxLayoutGap]="XL_GAP">
   <ren-text [text]="question"></ren-text>
 
-  <mat-radio-group fxLayout="column" (change)="selectedAnswerId = $event.value" [fxLayoutGap]="SMALL_GAP">
+  <mat-radio-group fxLayout="column" (change)="selectedAnswerId = $event.value" [fxLayoutGap]="MEDIUM_GAP">
     <ng-container *ngFor="let answer of answers">
       <mat-radio-button [value]="answer.id">
         {{ answer.answer | translate }}

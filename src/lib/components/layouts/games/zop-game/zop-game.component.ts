@@ -155,7 +155,7 @@ export class ZopGameComponent extends BaseComponent
 
     const move = function(event) {
       const rect = event.target.getBoundingClientRect();
-      alert(event.target);
+      alert(event.touches[0].pageX);
       // normalize touch inputs
       if (event.pageX) {
         X = event.pageX - rect.left;
