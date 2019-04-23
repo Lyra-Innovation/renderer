@@ -157,14 +157,16 @@ export class ZopGameComponent extends BaseComponent
       const rect = event.target.getBoundingClientRect();
       alert(event.touches[0].pageX);
       // normalize touch inputs
-      if (event.pageX) {
-        alert('hi' + event.pageY + rect.top);
-        X = event.pageX - rect.left;
-        Y = event.pageY - rect.top;
-      } else {
-        alert('hi2' + event.touches[0].pageY + rect.top + '/' + event.targetTouches[0].pageY);
+      if (
+        event.targetTouches &&
+        event.targetTouches.length > 0 &&
+        event.targetTouches[0].pageY
+      ) {
         X = event.touches[0].pageX - rect.left;
         isSelecting = Y = event.touches[0].pageY - rect.top;
+      } else {
+        X = event.pageX - rect.left;
+        Y = event.pageY - rect.top;
       }
 
       // select dots
