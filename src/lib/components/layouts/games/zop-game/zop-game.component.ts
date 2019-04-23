@@ -115,7 +115,7 @@ export class ZopGameComponent extends BaseComponent
       }
     }
 
-    canvasElement.addEventListener('mousedown', () => (isSelecting = 1));
+    canvasElement.addEventListener('mousedown', () => (isSelecting = 1), false);
 
     const touchend = function(setScore) {
       // ignore single selections
@@ -137,11 +137,15 @@ export class ZopGameComponent extends BaseComponent
       highestRow = isSelecting = 0;
       selected = [];
     };
-    canvasElement.addEventListener('touchend', () =>
-      touchend(s => this.setScore(s))
+    canvasElement.addEventListener(
+      'touchend',
+      () => touchend(s => this.setScore(s)),
+      false
     );
-    canvasElement.addEventListener('mouseup', () =>
-      touchend(s => this.setScore(s))
+    canvasElement.addEventListener(
+      'mouseup',
+      () => touchend(s => this.setScore(s)),
+      false
     );
 
     const move = function(event) {
@@ -186,8 +190,8 @@ export class ZopGameComponent extends BaseComponent
         }
       }
     };
-    canvasElement.addEventListener('mousemove', e => move(e));
-    canvasElement.addEventListener('touchmove', e => move(e));
+    canvasElement.addEventListener('mousemove', e => move(e), false);
+    canvasElement.addEventListener('touchmove', e => move(e), false);
     /**
      * By Ken Fyrstenberg Nilsen
      *
