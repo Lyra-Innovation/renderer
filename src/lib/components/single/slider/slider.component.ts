@@ -37,6 +37,9 @@ export class SliderComponent extends CustomForm {
   label: string; // Hidden if omitted
 
   @Input()
+  description: string; // Hidden if omitted
+
+  @Input()
   autoTicks: boolean = true;
 
   @Input()

@@ -1,9 +1,9 @@
-<div fxLayout="column">
+<div fxLayout="column" fxLayoutGap="20px">
+  <ren-text *ngIf="label" [text]="label" type="label"></ren-text>
   <ren-text
-    *ngIf="label"
-    [text]="label"
-    type="label"
-    style="margin-bottom: 20px;"
+    *ngIf="description"
+    [text]="description"
+    type="paragraph"
   ></ren-text>
   <mat-slider
     class="renderer-slider"

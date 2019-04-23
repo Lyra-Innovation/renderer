@@ -10,6 +10,7 @@ import {
 import { LayoutComponent } from '../layout.component';
 import { ComponentRendererService } from '../../../services/component-renderer.service';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'ren-selection-grid',
@@ -36,6 +37,7 @@ export class SelectionGridComponent extends LayoutComponent<any>
   @Input()
   dialogFooter: string[];
 
+  /** Optional */
   @Input()
   config: MatDialogConfig = {
     disableClose: true
@@ -43,6 +45,9 @@ export class SelectionGridComponent extends LayoutComponent<any>
 
   @Input()
   selectable: boolean = true;
+
+  @Input()
+  emptyMessage: string = 'CORE.components.selection-grid.empty';
 
   /** Outputs */
   @Output()

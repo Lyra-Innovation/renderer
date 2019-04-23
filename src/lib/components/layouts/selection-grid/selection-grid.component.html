@@ -1,54 +1,60 @@
-<mat-grid-list cols="3" rowHeight="160px" fxFlex>
+<ng-container *ngIf="!(tiles && tiles.length > 0)">
+  <ren-text [text]="emptyMessage" type="label" style="padding: 36px 0;"></ren-text>
+</ng-container>
+
+<ng-container *ngIf="tiles && tiles.length > 0">
+  <mat-grid-list cols="3" rowHeight="160px" fxFlex>
+    <ng-container *ngFor="let tile of tiles">
+      <mat-grid-tile fxFlex>
+        <button mat-button class="tile-button" (click)="openDialog(tile)">
+          <ren-image
+            type="avatar"
+            [src]="tile.imageSrc"
+            [legend]="tile.dialogTitle"
+            objectFit="cover"
+          >
+          </ren-image>
+        </button>
+      </mat-grid-tile>
+    </ng-container>
+  </mat-grid-list>
+
   <ng-container *ngFor="let tile of tiles">
-    <mat-grid-tile fxFlex>
-      <button mat-button class="tile-button" (click)="openDialog(tile)">
-        <ren-image
-          type="avatar"
-          [src]="tile.imageSrc"
-          [legend]="tile.dialogTitle"
-          objectFit="cover"
+    <ren-custom-child-template [childKey]="'content-' + tile.id">
+      <div fxLayout="column" [fxLayoutGap]="LARGE_GAP">
+        <ren-text [text]="tile.dialogTitle" type="page-title"></ren-text>
+        <ren-text
+          [text]="tile.dialogText"
+          type="paragraph"
+          style="padding: 30px 0;"
+        ></ren-text>
+        <ren-text
+          *ngIf="tile.dialogFooter"
+          [text]="tile.dialogFooter"
+          type="paragraph"
+        ></ren-text>
+
+        <div
+          fxLayout="row"
+          fxFlex
+          fxLayoutAlign="center center"
+          [fxLayoutGap]="MEDIUM_GAP"
+          class="renderer-dialog-actions"
         >
-        </ren-image>
-      </button>
-    </mat-grid-tile>
-  </ng-container>
-</mat-grid-list>
-
-<ng-container *ngFor="let tile of tiles">
-  <ren-custom-child-template [childKey]="'content-' + tile.id">
-    <div fxLayout="column" [fxLayoutGap]="LARGE_GAP">
-      <ren-text [text]="tile.dialogTitle" type="page-title"></ren-text>
-      <ren-text
-        [text]="tile.dialogText"
-        type="paragraph"
-        style="padding: 30px 0;"
-      ></ren-text>
-      <ren-text
-        *ngIf="tile.dialogFooter"
-        [text]="tile.dialogFooter"
-        type="paragraph"
-      ></ren-text>
-
-      <div
-        fxLayout="row"
-        fxFlex
-        fxLayoutAlign="center center"
-        [fxLayoutGap]="MEDIUM_GAP"
-        class="renderer-dialog-actions"
-      >
-        <ren-button
-          color="white"
-          appearance="raised"
-          text="CORE.globals.cancel"
-          (click)="closeDialog()"
-        ></ren-button>
-        <ren-button
-          *ngIf="selectable"
-          text="CORE.globals.select"
-          appearance="raised"
-          (click)="selectTile()"
-        ></ren-button>
+          <ren-button
+            color="white"
+            appearance="raised"
+            text="CORE.globals.cancel"
+            (click)="closeDialog()"
+          ></ren-button>
+          <ren-button
+            *ngIf="selectable"
+            text="CORE.globals.select"
+            appearance="raised"
+            (click)="selectTile()"
+          ></ren-button>
+        </div>
       </div>
-    </div>
-  </ren-custom-child-template>
+    </ren-custom-child-template>
+  </ng-container>
 </ng-container>
