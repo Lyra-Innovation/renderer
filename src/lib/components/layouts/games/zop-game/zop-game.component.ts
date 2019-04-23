@@ -116,6 +116,7 @@ export class ZopGameComponent extends BaseComponent
     }
 
     canvasElement.addEventListener('mousedown', () => (isSelecting = 1), false);
+    canvasElement.addEventListener('touchstart', () => (isSelecting = 1), false);
 
     const touchend = function(setScore) {
       // ignore single selections
