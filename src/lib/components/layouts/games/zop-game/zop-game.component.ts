@@ -161,8 +161,9 @@ export class ZopGameComponent extends BaseComponent
         event.targetTouches.length > 0 &&
         event.targetTouches[0].pageY
       ) {
-        X = event.touches[0].pageX - rect.left;
-        isSelecting = Y = event.touches[0].pageY - rect.top;
+        alert(event.targetTouches[0].pageY + ',' + rect.top);
+        X = event.targetTouches[0].pageX - rect.left;
+        isSelecting = Y = event.targetTouches[0].pageY - rect.top;
       } else {
         X = event.pageX - rect.left;
         Y = event.pageY - rect.top;
