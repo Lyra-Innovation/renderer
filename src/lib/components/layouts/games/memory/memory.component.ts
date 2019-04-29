@@ -116,7 +116,7 @@ export class MemoryComponent extends BaseComponent implements Minigame, OnInit {
 
   getPlaceholder(index: number): string {
     return this.placeholderImages[
-      (index + (Math.floor(index / this.cols) % 2)) % 2
+      (index + (Math.floor(index / this.cols) % this.cols)) % 2
     ];
   }
 
