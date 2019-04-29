@@ -1,10 +1,9 @@
-::ng-deep .memory-card {
+.memory-card {
   padding: 0;
   height: 100%;
-
-  .mat-button-wrapper {
-    height: 100%;
-  }
+}
+::ng-deep .memory-card .mat-button-wrapper {
+  height: 100%;
 }
 
 .flipping-card {
