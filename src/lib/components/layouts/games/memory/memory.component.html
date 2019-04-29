@@ -1,11 +1,10 @@
 <mat-grid-list [cols]="cols" rowHeight="1:1">
   <ng-container *ngFor="let card of cards; let idx = index">
     <mat-grid-tile>
-      <div class="flipping-card-scene">
-        <div
-          [ngClass]="'flipping-card ' + (card.flipped ? 'is-flipped' : '')"
-          fxFlex
-        >
+      <div
+        [ngClass]="'flipping-card-scene ' + (card.flipped ? 'is-flipped' : '')"
+      >
+        <div class="flipping-card" fxFlex>
           <button
             mat-button
             (click)="flipCard(idx)"
