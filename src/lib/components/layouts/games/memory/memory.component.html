@@ -5,17 +5,12 @@
         [ngClass]="'flipping-card-scene ' + (card.flipped ? 'is-flipped' : '')"
       >
         <div class="flipping-card" fxFlex>
-          <button
-            mat-button
-            (click)="flipCard(idx)"
+          <img
             fxFlex
-            [style.pointer-events]="flipping ? 'none' : 'all'"
-            class="memory-card flipping-card-face flipping-card-front"
-          >
-            <mat-card fxFlex class="renderer-shrinked-card">
-              <img fxFlex src="/assets/carta1_square.png" style="width: 100%;"/>
-            </mat-card>
-          </button>
+            class="flipping-card-face flipping-card-front"
+            src="/assets/carta1_square.png"
+            style="width: 100%;"
+          />
 
           <mat-card
             fxFlex
