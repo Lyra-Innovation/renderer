@@ -15,3 +15,11 @@
   opacity: 0.8;
   pointer-events: none;
 }
+
+::ng-deep ren-button .renderer-button {
+  overflow: hidden;
+}
+
+::ng-deep .renderer-slider {
+  width: 92%;
+}

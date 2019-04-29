@@ -1,10 +1,31 @@
-<div fxLayout="column" fxLayoutGap="20px">
-  <ren-text *ngIf="label" [text]="label" type="label"></ren-text>
-  <ren-text
-    *ngIf="description"
-    [text]="description"
-    type="paragraph"
-  ></ren-text>
+<div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+    <ren-text *ngIf="label" [text]="label" type="label"></ren-text>
+
+    <ren-dialog-launcher #dialog *ngIf="description">
+      <ren-custom-child-template childKey="launcher">
+        <ren-button
+          icon="info"
+          appearance="icon"
+          color="secondary"
+        ></ren-button>
+      </ren-custom-child-template>
+
+      <ren-custom-child-template childKey="content">
+        <div fxLayout="column">
+          <ren-text [text]="description" type="paragraph"></ren-text>
+          <ren-button
+            color="white"
+            appearance="raised"
+            text="CORE.globals.cancel"
+            (click)="dialog.dialogRef.close()"
+            class="renderer-dialog-actions"
+            ></ren-button>
+        </div>
+      </ren-custom-child-template>
+    </ren-dialog-launcher>
+  </div>
+
   <mat-slider
     class="renderer-slider"
     [max]="max"
