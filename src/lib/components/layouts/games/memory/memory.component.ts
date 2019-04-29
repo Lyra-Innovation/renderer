@@ -36,7 +36,7 @@ export class MemoryComponent extends BaseComponent implements Minigame, OnInit {
 
   /** Optional */
   @Input()
-  cols: number = 4;
+  cols: number = 3;
 
   @Input()
   rows: number = 4;
