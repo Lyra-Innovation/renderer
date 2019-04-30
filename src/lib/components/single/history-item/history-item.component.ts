@@ -31,7 +31,8 @@ export class HistoryItemComponent extends BaseComponent {
     return super.getCssClasses() + ' renderer-list-item';
   }
 
+  // Timestamp received is in seconds, we need in ms
   getDate() {
-    return new Date(this.timestamp);
+    return new Date(this.timestamp * 1000);
   }
 }
