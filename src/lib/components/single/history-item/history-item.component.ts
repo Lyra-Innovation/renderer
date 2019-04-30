@@ -8,7 +8,6 @@ import { timestamp } from 'rxjs/operators';
   styleUrls: ['./history-item.component.css']
 })
 export class HistoryItemComponent extends BaseComponent {
-
   @Input()
   title1: string;
 
@@ -30,5 +29,9 @@ export class HistoryItemComponent extends BaseComponent {
 
   protected getCssClasses() {
     return super.getCssClasses() + ' renderer-list-item';
+  }
+
+  getDate() {
+    return new Date(this.timestamp);
   }
 }

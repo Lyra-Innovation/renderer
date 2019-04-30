@@ -18,7 +18,7 @@
       ></ren-text>
     </div>
 
-    <ren-text [text]="timestamp | date:'d/M/yy, h:mm a'" type="sublabel"></ren-text>
+    <ren-text [text]="getDate() | date:'d/M/yy, h:mm a'" type="sublabel"></ren-text>
   </div>
   <ren-text align="left" [text]="label2"></ren-text>
 </div>
