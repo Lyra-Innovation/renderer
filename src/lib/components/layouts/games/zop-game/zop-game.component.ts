@@ -115,12 +115,8 @@ export class ZopGameComponent extends BaseComponent
       }
     }
 
-    canvasElement.addEventListener('mousedown', () => (isSelecting = 1), false);
-    canvasElement.addEventListener(
-      'touchstart',
-      () => (isSelecting = 1),
-      false
-    );
+    document.addEventListener('mousedown', () => (isSelecting = 1), false);
+    document.addEventListener('touchstart', () => (isSelecting = 1), false);
 
     const touchend = function(setScore) {
       // ignore single selections
@@ -142,41 +138,27 @@ export class ZopGameComponent extends BaseComponent
       highestRow = isSelecting = 0;
       selected = [];
     };
-    canvasElement.addEventListener(
+    document.addEventListener(
       'touchend',
       () => touchend(s => this.setScore(s)),
       false
     );
-    canvasElement.addEventListener(
+    document.addEventListener(
       'mouseup',
       () => touchend(s => this.setScore(s)),
       false
     );
 
     const move = function(event) {
-      const rect = event.target.getBoundingClientRect();
+      const rect = canvasElement.getBoundingClientRect();
+
       // normalize touch inputs
-      if (
-        event.targetTouches &&
-        event.targetTouches.length > 0 &&
-        event.targetTouches[0].pageY
-      ) {
-        X = event.targetTouches[0].pageX - rect.left;
-        isSelecting = Y = event.targetTouches[0].pageY - rect.top;
-      } else if (
-        event.touches &&
-        event.touches.length > 0 &&
-        event.touches[0].pageY
-      ) {
-        X = event.touches[0].pageX - rect.left;
-        isSelecting = Y = event.touches[0].pageY - rect.top;
-      } else {
+      if (event.pageX) {
         X = event.pageX - rect.left;
         Y = event.pageY - rect.top;
-      }
-
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window['MSStream']) {
-        Y *= 4;
+      } else {
+        X = event.touches[0].pageX - rect.left;
+        isSelecting = Y = event.touches[0].pageY - rect.top;
       }
 
       // select dots
