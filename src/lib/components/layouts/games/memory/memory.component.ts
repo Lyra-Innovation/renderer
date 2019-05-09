@@ -36,6 +36,15 @@ export class MemoryComponent extends BaseComponent implements Minigame, OnInit {
 
   /** Optional */
   @Input()
+  images1: string[] = [];
+
+  @Input()
+  images2: string[] = [];
+
+  @Input()
+  pairs: number = 4;
+
+  @Input()
   cols: number = 3;
 
   @Input()
@@ -64,7 +73,10 @@ export class MemoryComponent extends BaseComponent implements Minigame, OnInit {
 
   ngOnInit() {
     super.ngOnInit();
-    const imageList = this.images.map((image, index) => ({
+    const randomImages = this.shuffle(
+      this.images.concat(this.images1).concat(this.images2)
+    ).slice(0, this.pairs);
+    const imageList = randomImages.map((image, index) => ({
       id: index,
       label: '',
       image: image,
@@ -120,7 +132,7 @@ export class MemoryComponent extends BaseComponent implements Minigame, OnInit {
     ];
   }
 
-  shuffle(a) {
+  shuffle(a): Array<any> {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];

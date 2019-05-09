@@ -62,6 +62,7 @@ import { HistoryItemComponent } from './components/single/history-item/history-i
 import { QuestionsGameComponent } from './components/layouts/games/questions-game/questions-game.component';
 import { MemoryComponent } from './components/layouts/games/memory/memory.component';
 import { ZopGameComponent } from './components/layouts/games/zop-game/zop-game.component';
+import { DividerComponent } from './components/single/divider/divider.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { ZopGameComponent } from './components/layouts/games/zop-game/zop-game.c
     HistoryItemComponent,
     QuestionsGameComponent,
     MemoryComponent,
-    ZopGameComponent
+    ZopGameComponent,
+    DividerComponent
   ],
   imports: [
     CommonModule,
@@ -156,7 +158,8 @@ import { ZopGameComponent } from './components/layouts/games/zop-game/zop-game.c
     HistoryItemComponent,
     QuestionsGameComponent,
     MemoryComponent,
-    ZopGameComponent
+    ZopGameComponent,
+    DividerComponent
   ],
   entryComponents: [
     ErrorComponent,
@@ -164,6 +167,7 @@ import { ZopGameComponent } from './components/layouts/games/zop-game/zop-game.c
     ListLayoutComponent,
     InputComponent,
     CustomTemplateComponent,
+    DividerComponent,
     ListComponent,
     ToolbarComponent,
     HistoryItemComponent,

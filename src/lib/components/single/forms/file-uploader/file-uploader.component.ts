@@ -67,4 +67,8 @@ export class FileUploaderComponent extends CustomForm implements OnInit {
     this.file = $event;
     this.valueChanges.emit(this.file);
   }
+
+  getMaxSize() {
+    return this.size / 1000000 + 'MB';
+  }
 }

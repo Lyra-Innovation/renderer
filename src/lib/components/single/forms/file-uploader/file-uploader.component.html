@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="start center" [fxLayoutGap]="LARGE_GAP">
   <ng-container *ngIf="fabIcon">
-      <button
+    <button
       type="button"
       mat-fab
       ngxFilePicker
@@ -11,7 +11,7 @@
       [filter]="filterFileBeforeReading()"
       color="accent"
     >
-    <mat-icon>{{fabIcon}}</mat-icon>
+      <mat-icon>{{ fabIcon }}</mat-icon>
     </button>
   </ng-container>
 
@@ -27,14 +27,20 @@
       (filePick)="filePick($event)"
       [filter]="filterFileBeforeReading()"
     >
-      {{ buttonTitle || 'CORE.components.file-uploader.pick-file' | translate }}
+      {{
+        (buttonTitle ? buttonTitle : 'CORE.components.file-uploader.pick-file')
+          | translate: { maxsize: getMaxSize() }
+      }}
     </button>
   </ng-container>
 
   <ren-text
     *ngIf="!file"
     type="label"
-    [text]="label || 'CORE.components.file-uploader-no-file-selected'"
+    [text]="
+      label || 'CORE.components.file-uploader-no-file-selected'
+        | translate: { maxsize: getMaxSize() }
+    "
   ></ren-text>
   <ren-text *ngIf="file" type="label" [text]="file.name"></ren-text>
 </div>
