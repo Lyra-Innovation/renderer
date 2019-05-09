@@ -135,6 +135,8 @@ export abstract class LayoutComponent<CHILDREN extends string>
 
   filterChildrenKeys() {
     const values = this._data ? this._data.values : null;
+    const children =
+      this._data && this._data['children'] ? this._data['children'] : null;
     if (this.filterChildrenBy) {
       this.childrenKeys = this.childrenKeys.filter(
         // tslint:disable-next-line:no-eval
