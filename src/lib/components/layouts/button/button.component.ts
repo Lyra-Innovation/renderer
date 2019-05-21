@@ -107,6 +107,8 @@ export class ButtonComponent extends LayoutComponent<any> {
           this.router.navigate([this.href], {
             relativeTo: this.activatedRoute
           });
+        } else if (this.href.startsWith('http')) {
+          location.replace(this.href);
         } else {
           this.router.navigateByUrl(this.href);
         }
