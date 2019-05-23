@@ -3,7 +3,8 @@ import {
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
-  Input
+  Input,
+  OnInit
 } from '@angular/core';
 import { BaseComponent } from '../../../base.component';
 import { Minigame } from '../minigame';
@@ -21,7 +22,8 @@ export interface Answer {
   styleUrls: ['./questions-game.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QuestionsGameComponent extends BaseComponent implements Minigame {
+export class QuestionsGameComponent extends BaseComponent
+  implements Minigame, OnInit {
   /** Required */
 
   @Input()
@@ -40,6 +42,10 @@ export class QuestionsGameComponent extends BaseComponent implements Minigame {
 
   constructor() {
     super();
+  }
+
+  ngOnInit() {
+    this.answers = this.shuffle(this.answers);
   }
 
   getScore(totalTime: number, timeSpent: number): { win: boolean; score: any } {
@@ -62,5 +68,13 @@ export class QuestionsGameComponent extends BaseComponent implements Minigame {
       this.answerSubmitted = true;
       this.gameFinished.emit();
     }
+  }
+
+  shuffle(a): Array<any> {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   }
 }
