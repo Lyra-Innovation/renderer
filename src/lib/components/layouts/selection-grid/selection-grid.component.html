@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-container *ngIf="tiles && tiles.length > 0">
-  <mat-grid-list cols="3" rowHeight="160px" fxFlex>
+  <mat-grid-list cols="3" rowHeight="170px" fxFlex>
     <ng-container *ngFor="let tile of tiles">
       <mat-grid-tile fxFlex>
         <button mat-button class="tile-button" (click)="openDialog(tile)">
