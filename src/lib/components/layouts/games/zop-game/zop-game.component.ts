@@ -77,6 +77,7 @@ export class ZopGameComponent extends BaseComponent
     const ctx = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
     ctx.canvas.width = ctx.canvas.clientWidth;
     ctx.canvas.height = ctx.canvas.clientHeight;
+    resizeCanvas(ctx.canvas);
 
     let X, Y;
 
@@ -155,12 +156,15 @@ export class ZopGameComponent extends BaseComponent
       console.log('rect', rect);
 
       // normalize touch inputs
-      if (event.pageX) {
+      if (event.layerY) {
+        X = event.layerX;
+        Y = event.layerY;
+      } else if (event.pageX) {
         X = event.pageX - rect.left;
         Y = event.pageY - rect.top;
       } else {
         X = event.touches[0].pageX - rect.left;
-        isSelecting = Y = event.touches[0].pageY - rect.top;
+        Y = event.touches[0].pageY - rect.top;
       }
 
       // select dots
@@ -349,4 +353,14 @@ export class ZopGameComponent extends BaseComponent
       }
     }, 33);
   }
+}
+
+function resizeCanvas(canvas) {
+  // When zoomed out to less than 100%, for some very strange reason,
+  // some browsers report devicePixelRatio as less than 1
+  // and only part of the canvas is cleared then.
+  const ratio = Math.max(window.devicePixelRatio || 1, 1);
+  canvas.width = canvas.offsetWidth * ratio;
+  canvas.height = canvas.offsetHeight * ratio;
+  canvas.getContext('2d').scale(ratio, ratio);
 }
