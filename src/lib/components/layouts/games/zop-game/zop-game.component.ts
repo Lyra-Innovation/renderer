@@ -173,7 +173,7 @@ export class ZopGameComponent extends BaseComponent
               selected[0].o === dot.o &&
               (selected[0] &&
                 Math.abs(
-                  Math.abs(selected[0].r - dot.r) -
+                  Math.abs(selected[0].r - dot.r) +
                     Math.abs(selected[0].ctx - dot.ctx)
                 ) === 1))
           ) {
