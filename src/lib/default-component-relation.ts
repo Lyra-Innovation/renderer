@@ -36,6 +36,7 @@ import { QuestionsGameComponent } from './components/layouts/games/questions-gam
 import { MemoryComponent } from './components/layouts/games/memory/memory.component';
 import { ZopGameComponent } from './components/layouts/games/zop-game/zop-game.component';
 import { DividerComponent } from './components/single/divider/divider.component';
+import { YtVideoComponent } from './components/single/yt-video/yt-video.component';
 
 export const defaultComponentRelation: ComponentRelation = {
   types: {
@@ -149,7 +150,8 @@ export const defaultComponentRelation: ComponentRelation = {
     },
     divider: {
       type: DividerComponent
-    }
+    },
+    'yt-video': { type: YtVideoComponent }
   },
   keys: {}
 };

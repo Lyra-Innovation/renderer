@@ -63,6 +63,7 @@ import { QuestionsGameComponent } from './components/layouts/games/questions-gam
 import { MemoryComponent } from './components/layouts/games/memory/memory.component';
 import { ZopGameComponent } from './components/layouts/games/zop-game/zop-game.component';
 import { DividerComponent } from './components/single/divider/divider.component';
+import { YtVideoComponent } from './components/single/yt-video/yt-video.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { DividerComponent } from './components/single/divider/divider.component'
     CustomChildTemplateComponent,
     ProfileComponent,
     StepperComponent,
+    YtVideoComponent,
     TabsComponent,
     MinigameComponent,
     CardComponent,
@@ -157,6 +159,7 @@ import { DividerComponent } from './components/single/divider/divider.component'
     SelectionGridComponent,
     HistoryItemComponent,
     QuestionsGameComponent,
+    YtVideoComponent,
     MemoryComponent,
     ZopGameComponent,
     DividerComponent
@@ -199,6 +202,7 @@ import { DividerComponent } from './components/single/divider/divider.component'
     MenuLauncherComponent,
     SidenavComponent,
     MobileShellComponent,
+    YtVideoComponent,
     FormStepsComponent,
     SelectionGridComponent
   ]
