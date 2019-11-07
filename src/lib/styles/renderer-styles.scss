@@ -126,6 +126,17 @@ ren-view-renderer {
   width: 100%;
 }
 
+.renderer-fill-children {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.renderer-fill-children > div {
+  flex-grow: 1;
+  width: 100%;
+  padding: 0 10px;
+}
+
 .renderer-sidenav-container {
   .renderer-sidenav {
   }

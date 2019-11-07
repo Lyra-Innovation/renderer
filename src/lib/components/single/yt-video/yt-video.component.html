@@ -2,6 +2,6 @@
   type="text/html"
   [width]="width"
   [height]="height"
-  [src]="getVideoSource()"
+  [src]="getVideoSource() | safe"
   frameborder="0"
 ></iframe>

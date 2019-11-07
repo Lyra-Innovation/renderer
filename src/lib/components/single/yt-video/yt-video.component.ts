@@ -30,10 +30,10 @@ export class YtVideoComponent extends BaseComponent {
   autoplay: boolean = true;
 
   @Input()
-  width: number = 640;
+  width: string = '100%';
 
   @Input()
-  height: number = 360;
+  height: string = '100%';
 
   getVideoSource(): string {
     return `https://www.youtube.com/embed/${this.videoId}?autoplay=${this.autoplay ? 1 : 0}&origin=${window.location.origin}`;

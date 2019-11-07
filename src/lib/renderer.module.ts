@@ -64,6 +64,7 @@ import { MemoryComponent } from './components/layouts/games/memory/memory.compon
 import { ZopGameComponent } from './components/layouts/games/zop-game/zop-game.component';
 import { DividerComponent } from './components/single/divider/divider.component';
 import { YtVideoComponent } from './components/single/yt-video/yt-video.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { YtVideoComponent } from './components/single/yt-video/yt-video.componen
     QuestionsGameComponent,
     MemoryComponent,
     ZopGameComponent,
-    DividerComponent
+    DividerComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,
@@ -162,7 +164,8 @@ import { YtVideoComponent } from './components/single/yt-video/yt-video.componen
     YtVideoComponent,
     MemoryComponent,
     ZopGameComponent,
-    DividerComponent
+    DividerComponent,
+    SafePipe
   ],
   entryComponents: [
     ErrorComponent,
