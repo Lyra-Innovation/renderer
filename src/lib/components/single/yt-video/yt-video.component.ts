@@ -27,7 +27,7 @@ export class YtVideoComponent extends BaseComponent {
 
   /** Optional */
   @Input()
-  autoplay: boolean = true;
+  autoplay: boolean = false;
 
   @Input()
   width: string = '100%';
