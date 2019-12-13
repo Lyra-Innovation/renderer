@@ -6,16 +6,16 @@ import {
   EventEmitter,
   Output,
   forwardRef
-} from '@angular/core';
-import { LayoutComponent } from '../layout.component';
-import { ComponentRendererService } from '../../../services/component-renderer.service';
-import { BaseComponent } from '../../base.component';
-import { Dictionary } from '@ngrx/entity';
+} from "@angular/core";
+import { LayoutComponent } from "../layout.component";
+import { ComponentRendererService } from "../../../services/component-renderer.service";
+import { BaseComponent } from "../../base.component";
+import { Dictionary } from "@ngrx/entity";
 
 @Component({
-  selector: 'ren-form-steps',
-  templateUrl: './form-steps.component.html',
-  styleUrls: ['./form-steps.component.css'],
+  selector: "ren-form-steps",
+  templateUrl: "./form-steps.component.html",
+  styleUrls: ["./form-steps.component.css"],
   providers: [
     {
       provide: BaseComponent,
@@ -37,6 +37,8 @@ export class FormStepsComponent extends LayoutComponent<any> implements OnInit {
   @Output()
   formSubmitted = new EventEmitter<any>();
 
+  didFormSubmit: boolean = false;
+
   formValues: Dictionary<any> = {};
 
   constructor(
@@ -47,7 +49,7 @@ export class FormStepsComponent extends LayoutComponent<any> implements OnInit {
   }
 
   protected getCssClasses() {
-    return super.getCssClasses() + ' renderer-fill';
+    return super.getCssClasses() + " renderer-fill";
   }
 
   protected onChildrenRendered() {
@@ -60,7 +62,11 @@ export class FormStepsComponent extends LayoutComponent<any> implements OnInit {
     const childKey = this.childrenKeys[this.activeStep];
     this.formValues[childKey] = value;
 
-    if (this.activeStep + 1 >= this.childrenKeys.length) {
+    if (
+      this.activeStep + 1 >= this.childrenKeys.length &&
+      !this.didFormSubmit
+    ) {
+      this.didFormSubmit = true;
       this.formSubmitted.emit(this.formValues);
     } else {
       this.goToPage(this.activeStep + 1);
@@ -75,7 +81,7 @@ export class FormStepsComponent extends LayoutComponent<any> implements OnInit {
       this.changeDetectorRef.detectChanges();
 
       setTimeout(() => {
-        this.onChildEvent(nextChildKey, 'formSubmitted', $event =>
+        this.onChildEvent(nextChildKey, "formSubmitted", $event =>
           this.submitPage($event)
         );
         if (this.formValues[nextChildKey]) {
@@ -89,13 +95,13 @@ export class FormStepsComponent extends LayoutComponent<any> implements OnInit {
 
   protected onBubbleEvent(name: string, params: any, event: any) {
     switch (name) {
-      case 'submitPage':
+      case "submitPage":
         this.submitPage(params);
         break;
-      case 'previousPage':
+      case "previousPage":
         this.goToPage(this.activeStep - 1);
         break;
-      case 'goToPage':
+      case "goToPage":
         this.goToPage(params.pageIndex);
         break;
 
